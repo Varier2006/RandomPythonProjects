@@ -81,6 +81,7 @@ if __name__ == "__main__":
 """
 root = Tk()
 root.geometry("1280x720")
+root.title("Hmm")
 canvas = Canvas(root, width="1280", height="720")
 canvas.pack()
 
@@ -88,9 +89,35 @@ dosky = []
 
 
 class Player:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+
+        self.rectangle = canvas.create_rectangle(5, 5, 25, 25, fill="black")
+        canvas.pack()
+
+    def movement(self):
+        canvas.move(self.rectangle, self.x, self.y)
+
+    def left(self):
+        self.x = -5
+        self.y = 0
+        self.movement()
+
+    def right(self):
+        self.x = 5
+        self.y = 0
+        self.movement()
+
+    def up(self):
+        self.x = 0
+        self.y = -5
+        self.movement()
+
+    def down(self):
+        self.x = 0
+        self.y = 5
+        self.movement()
 
 
 class Doska:
@@ -101,7 +128,6 @@ class Doska:
         self.y2 = y2
 
 
-player = Player(0, 0)
 doska0 = Doska(0, 0, 0, 0)
 dosky.append(doska0)
 doska1 = Doska(0, 0, 0, 0)
@@ -142,7 +168,16 @@ def keypressed(arg):
     if arg.char == " ":
         print("jum")
         jumped()
-
+    elif arg.char == "w":
+        Player.up()
+    elif arg.char == "a":
+        Player.left()
+    elif arg.char == "s":
+        Player.down()
+    elif arg.char == "d":
+        Player.right()
+    else:
+        print()
 
 root.bind("<Key>", keypressed)
 canvas.mainloop()
