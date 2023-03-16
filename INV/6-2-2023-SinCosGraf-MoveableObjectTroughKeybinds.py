@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter.ttk import *
 import math
 
 # samotny canvas nema moznost readovat keyboard input tak musim dat canvas do normalneho Tk window
@@ -34,4 +33,4 @@ for i in range(360):
 
 
 root.bind("<Key>", keypressed)
-canvas.mainloop()
+mainloop()

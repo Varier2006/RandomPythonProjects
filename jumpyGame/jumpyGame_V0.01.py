@@ -7,16 +7,18 @@
 
 from tkinter import *
 
+width = 1280
+height = 720
 root = Tk()
-root.geometry("1280x720")
-root.title("Hmm")
-canvas = Canvas(root, width="1280", height="720")
+root.geometry(f"{width}x{height}")
+canvas = Canvas(root, width=width, height=height)
 canvas.pack()
+canvas.configure(scrollregion=(-width / 2, -height / 2, width / 2, height / 2))
 
 dosky = []
 key = ""
 gravity = True
-
+skip = 0
 
 class Player:
     def __init__(self):
@@ -47,17 +49,13 @@ class Player:
         self.movement()
 
     def down(self):
+        global skip
         print("down")
-        self.x = 0
-        self.y = 1
-        self.movement()
+        skip = 11
 
     def keypressed(self):
         global key
-        if key == " ":
-            print("jum")
-            jumped()
-        elif key == "w":
+        if key == "w" or key == " ":
             self.up()
         elif key == "a":
             self.left()
@@ -67,6 +65,11 @@ class Player:
             self.right()
         else:
             print(key)
+
+    def gravity(self):
+        self.x = 0
+        self.y = 1
+        self.movement()
 
 
 class Doska:
@@ -122,14 +125,16 @@ def keypress(arg):
 
 
 def cycle():
-    global gravity, dosky
-    for i in dosky:
-        if i.pos[0] <= player.pos[2] and i.pos[2] >= player.pos[0] and i.pos[1] <= player.pos[1] + 21 and i.pos[3] <= \
-                player.pos[3] + 21:
-            gravity = False
-            print("satisfies")
-    if gravity == True:
-        player.down()
+    global gravity, dosky, skip
+    if skip > 0:
+        skip = skip - 1
+    else:
+        for i in dosky:
+            if i.pos[0] <= player.pos[2] and i.pos[2] >= player.pos[0] and i.pos[1] >= player.pos[1] +11 and i.pos[3] <= player.pos[3] + 11:
+                gravity = False
+                print("satisfies")
+    if gravity:
+        player.gravity()
     gravity = True
     canvas.after(100, cycle)
 
