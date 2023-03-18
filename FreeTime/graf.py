@@ -22,8 +22,8 @@ lastx = 0
 lasty = 0
 offset = 297
 for i in range(width*2):
-    telp = tan(tan(tan(radians(i))))
-    telp = telp * step * 1
+    telp = sin(radians(i))
+    telp = telp * step * 100
     canvas.create_line(lastx - width+ offset, lasty, lastx + step - width+offset, telp)
     lastx = lastx + step
     lasty = telp
