@@ -21,6 +21,7 @@ key = ""
 gravity = True
 skip = 0
 
+
 class Player:
     def __init__(self):
         self.x = 0
@@ -131,7 +132,8 @@ def cycle():
         skip = skip - 1
     else:
         for i in dosky:
-            if i.pos[0] <= player.pos[2] and i.pos[2] >= player.pos[0] and i.pos[1] >= player.pos[1] +11 and i.pos[3] <= player.pos[3] + 11:
+            if i.pos[0] <= player.pos[2] and i.pos[2] >= player.pos[0] and i.pos[1] >= player.pos[1] + 11 and i.pos[
+                3] <= player.pos[3] + 11:
                 gravity = False
                 print("satisfies")
     if gravity:

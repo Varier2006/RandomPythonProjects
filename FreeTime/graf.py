@@ -21,10 +21,18 @@ step = 3
 lastx = 0
 lasty = 0
 offset = 297
-for i in range(width*2):
-    telp = sin(radians(i))
-    telp = telp * step * 100
-    canvas.create_line(lastx - width+ offset, lasty, lastx + step - width+offset, telp)
+for i in range(width * 2):
+    telp = pow(sin(radians(i + 1)), -1)
+    telp = telp * step * 1
+    canvas.create_line(lastx - width + offset, lasty, lastx + step - width + offset, telp, fill="blue")
+    lastx = lastx + step
+    lasty = telp
+lastx = 0
+lasty = 0
+for i in range(width * 2):
+    telp = pow(cos(radians(i)), -1)
+    telp = telp * step * 1
+    canvas.create_line(lastx - width + offset, lasty, lastx + step - width + offset, telp, fill="red")
     lastx = lastx + step
     lasty = telp
 
