@@ -6,6 +6,7 @@
 # ked stupne na nejaku platformu sa posunie minimal height co je vlastne podla coho sa to bude spravat
 
 from tkinter import *
+from random import *
 
 width = 1280
 height = 720
@@ -53,7 +54,7 @@ class Player:
     def down(self):
         global skip
         print("down")
-        skip = 11
+        skip = 1
 
     def keypressed(self):
         global key
@@ -78,7 +79,8 @@ class Doska:
     def __init__(self):
         self.y = 0
         self.x = 0
-        self.rectangle = canvas.create_rectangle(105, 105, 175, 115, fill="black")
+        x = randrange(width)-(width/2)
+        self.rectangle = canvas.create_rectangle(x, 105, x+100, 115, fill="black")
         self.pos = canvas.coords(self.rectangle)
         canvas.pack()
 
@@ -132,14 +134,13 @@ def cycle():
         skip = skip - 1
     else:
         for i in dosky:
-            if i.pos[0] <= player.pos[2] and i.pos[2] >= player.pos[0] and i.pos[1] >= player.pos[1] + 11 and i.pos[
-                3] <= player.pos[3] + 11:
+            if i.pos[0] <= player.pos[2] and i.pos[2] >= player.pos[0] and i.pos[1] == player.pos[3] + 1:
                 gravity = False
                 print("satisfies")
     if gravity:
         player.gravity()
     gravity = True
-    canvas.after(100, cycle)
+    canvas.after(50, cycle)
 
 
 root.bind("<Key>", keypress)

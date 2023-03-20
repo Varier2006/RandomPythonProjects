@@ -3,7 +3,7 @@ from random import *
 
 root = Tk()
 root.geometry("1280x720")
-canvas = Canvas(root, width="1280", height="700", background="#000000")
+canvas = Canvas(root, width="1280", height="695", background="#000000")
 canvas.pack(side="bottom")
 
 
@@ -45,12 +45,13 @@ def cycle():
 
     if blue >= blueGoal and red >= redGoal and green >= greenGoal:
         print("konec")
+        colorChange()
         return
     canvas.config(background=col)
-    canvas.after(10, cycle)
+    canvas.after(5, cycle)
 
 
-def colorChange():
+def colorChange(d=""):
     global red, redGoal, green, greenGoal, blue, blueGoal, rand
     print("colorChangeINIT")
     red = 0
@@ -75,5 +76,6 @@ def colorChange():
 
 
 button = Button(root, text="Initiate Color Change", command=colorChange)
-button.pack(side="top")
+button.pack(side="bottom")
+root.bind("<Key>", colorChange)
 canvas.mainloop()
