@@ -19,6 +19,7 @@ canvas.configure(scrollregion=(-width / 2, -height / 2, width / 2, height / 2))
 
 dosky = []
 key = ""
+keys = []
 gravity = True
 skip = 0
 
@@ -56,15 +57,14 @@ class Player:
         print("down")
         skip = 1
 
-    def keypressed(self):
-        global key
-        if key == "w" or key == " ":
+    def keypressed(self,key):
+        if key == 25 or key == 65:
             self.up()
-        elif key == "a":
+        elif key == 38:
             self.left()
-        elif key == "s":
+        elif key == 39:
             self.down()
-        elif key == "d":
+        elif key == 40:
             self.right()
         else:
             print(key)
@@ -79,8 +79,8 @@ class Doska:
     def __init__(self):
         self.y = 0
         self.x = 0
-        x = randrange(width)-(width/2)
-        self.rectangle = canvas.create_rectangle(x, 105, x+100, 115, fill="black")
+        x = randrange(width) - (width / 2)
+        self.rectangle = canvas.create_rectangle(x, 105, x + 100, 115, fill="black")
         self.pos = canvas.coords(self.rectangle)
         canvas.pack()
 
@@ -121,29 +121,43 @@ doska9 = Doska()
 dosky.append(doska9)
 
 
-def keypress(arg):
-    print(arg)
-    global key
-    pressed = True
-    key = arg.char
-    player.keypressed()
+def keyup(arg):
+    global keys
+    print("keyup")
+    if arg.keycode in keys:
+        keys.pop(keys.index(arg.keycode))
+        print("pop")
+
+        # var.set(str(history))
+
+
+def keydown(arg):
+    global keys
+    print("keydown")
+    if not arg.keycode in keys:
+        keys.append(arg.keycode)
+        print("append")
+        # var.set(str(history))
 
 
 def cycle():
-    global gravity, dosky, skip
+    global gravity, dosky, skip, keys
+    for i in keys:
+        player.keypressed(i)
+        print(keys)
     if skip > 0:
         skip = skip - 1
     else:
         for i in dosky:
             if i.pos[0] <= player.pos[2] and i.pos[2] >= player.pos[0] and i.pos[1] == player.pos[3] + 1:
                 gravity = False
-                print("satisfies")
     if gravity:
         player.gravity()
     gravity = True
     canvas.after(50, cycle)
 
 
-root.bind("<Key>", keypress)
+root.bind("<KeyPress>", keydown)
+root.bind("<KeyRelease>", keyup)
 cycle()
 canvas.mainloop()
