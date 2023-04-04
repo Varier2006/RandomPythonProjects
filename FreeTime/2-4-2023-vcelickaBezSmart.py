@@ -83,7 +83,7 @@ def cycle():
                 if len(kvety) > i + 1:
                     kvety[i + 1].done = False
                     time.sleep(2)
-    canvas.after(10, cycle)
+    canvas.after(5, cycle)
 
 
 cycle()

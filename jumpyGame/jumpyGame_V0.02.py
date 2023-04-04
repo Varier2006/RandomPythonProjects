@@ -154,7 +154,7 @@ def cycle():
     if gravity:
         player.gravity()
     gravity = True
-    canvas.after(50, cycle)
+    canvas.after(25, cycle)
 
 
 root.bind("<KeyPress>", keydown)
