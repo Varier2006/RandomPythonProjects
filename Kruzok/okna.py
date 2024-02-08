@@ -26,7 +26,7 @@ def klik(pos):
     print(f"{pos.x}x{pos.y}")
     for i in x:
         for ii in y:
-            if wo + int(str(i)[0]) * size < pos.x < wo + int(str(i)[0]) * size + width and ho + ii * size < pos.y < ho + ii * size + width:
+            if wo + int(str(i)[1]) * size < pos.x < wo + int(str(i)[1]) * size + width and ho + int(str(ii)[1]) * size < pos.y < ho + int(str(ii)[1]) * size + width:
                 print(f"{i}x{ii}")
                 if int(str(i)[1]) == 1 and int(str(ii)[1]) == 1:
                     canvas.create_rectangle(wo + i * size, ho + ii * size, wo + i * size + width,
