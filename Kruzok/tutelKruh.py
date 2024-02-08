@@ -1,0 +1,2 @@
+# pokusit cez turtle module kreslit kruh s setnutelnim polomerom a obvodom v zlomku nech sa vie kreslit polkruh atd, mozno to urobit ako library
+# moznost este aj vyberu bud stredneho bodu alebo zaciatocneho bodu vykreslenia
