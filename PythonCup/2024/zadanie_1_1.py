@@ -14,9 +14,12 @@ dlzka = randint(80, 200)
 zaciatok = randint(100, 200)
 odstupy = []
 x = 5
-for i in range(5):
+y = x
+while zaciatok > y:
     x = x + randint(1, 3)
+    y = y + x
     odstupy.append(x)
+odstupy.pop(-1)
 penup()
 lt(90)
 fd(dlzka / 2)
