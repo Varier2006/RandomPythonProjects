@@ -69,7 +69,7 @@ def klik(arg):
                     # timeout 2sec a spet na zelene
                 print(f"{cisla[m][n][0]}")
                 if checkwin == win:
-                    canvas.create_text(250, 250, text="W", font="Arial 100")
+                    canvas.create_text(len(cisla)*30 +20, len(cisla[0]) *30 + 100, text="W", font="Arial 100",fill="magenta")
 
 
 canvas.bind("<Button-1>", klik)
