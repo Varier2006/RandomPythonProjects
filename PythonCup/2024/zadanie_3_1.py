@@ -35,26 +35,41 @@ for m in range(M):
 
 print(cisla)
 print(cisla[1])
+win = 0
 for i in range(len(cisla)):
     for ii in range(len(cisla[i])):
         if int(cisla[i][ii][0]) % cislo == 0:
             cisla[i][ii][1] = 1
+            win = win + 1
+
 print(cisla)
 for m in range(len(cisla)):
     for n in range(len(cisla[0])):
         square(40 + m * 60, 120 + n * 60, cisla[m][n][0], "limegreen")
 
+temp = ["1"]
+print(temp)
+checkwin = 0
 
 def klik(arg):
+    global temp, win, checkwin
+    if temp[0] != "1":
+        square(40 + temp[0] * 60, 120 + temp[1] * 60, temp[2], "limegreen")
     for m in range(len(cisla)):
         for n in range(len(cisla[0])):
             if 40 + 60 * m - 25 <= arg.x <= 40 + 60 * m + 25 and 120 + n * 60 - 25 <= arg.y <= 120 + n * 60 + 25:
                 if cisla[m][n][1] == 1:
                     square(40 + m * 60, 120 + n * 60, cisla[m][n][0], "peru")
+                    checkwin = checkwin + 1
                 else:
                     square(40 + m * 60, 120 + n * 60, cisla[m][n][0], "tomato")
+                    temp = [m, n, cisla[m][n][0]]
+                    # square(40 + m * 60, 120 + n * 60, cisla[m][n][0], "limegreen")
+
                     # timeout 2sec a spet na zelene
                 print(f"{cisla[m][n][0]}")
+                if checkwin == win:
+                    canvas.create_text(250, 250, text="W", font="Arial 100")
 
 
 canvas.bind("<Button-1>", klik)
